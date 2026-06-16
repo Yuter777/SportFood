@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --carbon: #0d0e12;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--carbon);
+  color: #f5f6f8;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Carbon to'qima foni — logodagi to'qilgan matoga ishora */
+.carbon-texture {
+  background-color: #0d0e12;
+  background-image:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    radial-gradient(circle at 20% 10%, rgba(232, 40, 31, 0.08), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(90, 97, 114, 0.12), transparent 45%);
+  background-size: 6px 6px, 6px 6px, 100% 100%, 100% 100%;
+}
+
+/* Flame chiziq — logoning qizil aksenti */
+.flame-underline {
+  position: relative;
+}
+.flame-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #ff3b30, #e8281f, transparent);
+  border-radius: 2px;
+}
+
+/* Skewed badge — logodagi qiya formaga mos */
+.skew-badge {
+  transform: skewX(-8deg);
+}
+.skew-badge > * {
+  transform: skewX(8deg);
+}
+
+/* Scroll reveal boshlang'ich holati */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0e12;
+}
+::-webkit-scrollbar-thumb {
+  background: #272b34;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e8281f;
+}
+
+/* Focus ko'rinishi (accessibility) */
+*:focus-visible {
+  outline: 2px solid #ff3b30;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
