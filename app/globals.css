@@ -79,6 +79,53 @@ body {
   }
 }
 
+/* Instagram brend gradienti — avatar halqasi uchun */
+.ig-gradient {
+  background: linear-gradient(
+    45deg,
+    #feda75,
+    #fa7e1e,
+    #d62976,
+    #962fbf,
+    #4f5bd5
+  );
+}
+
+/* Avtomatik gorizontal scroll (marquee) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 45s linear infinite;
+  width: max-content;
+}
+/* Sichqoncha ustiga kelganda to'xtaydi */
+.marquee-pause:hover .animate-marquee {
+  animation-play-state: paused;
+}
+/* Chap va o'ng chetlarda yumshoq so'nish effekti */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;

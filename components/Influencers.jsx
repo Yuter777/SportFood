@@ -42,53 +42,60 @@ export default function Influencers() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-          {INFLUENCERS.people.map((p, i) => (
-            <Reveal key={p.handle} delay={i * 50}>
-              <a
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block h-full rounded-2xl border border-white/5 bg-ink-700 p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-flame/40 hover:shadow-card"
-              >
-                {/* Avatar — rasm bo'lsa ko'rsatiladi, bo'lmasa bosh harflar */}
-                <div className="relative mx-auto mb-4 h-20 w-20">
-                  <div className="absolute inset-0 rounded-full bg-flame-grad p-[2px]">
-                    <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-ink-800">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={`/influencers/${p.handle}.jpg`}
-                        alt={p.name}
-                        className="h-full w-full rounded-full object-cover"
-                        onError={(e) => {
-                          e.currentTarget.style.display = "none";
-                          e.currentTarget.nextElementSibling.style.display =
-                            "flex";
-                        }}
-                      />
-                      <span
-                        className="hidden h-full w-full items-center justify-center font-display text-2xl font-700 text-flame-light"
-                        style={{ display: "none" }}
-                      >
-                        {initials(p.name)}
-                      </span>
+        {/* Avtomatik gorizontal scroll (sichqoncha ustida to'xtaydi) */}
+        <Reveal>
+          <div className="marquee-pause marquee-mask overflow-hidden">
+            <div className="animate-marquee flex gap-6 py-2">
+              {[...INFLUENCERS.people, ...INFLUENCERS.people].map((p, i) => (
+                <a
+                  key={`${p.handle}-${i}`}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-hidden={i >= INFLUENCERS.people.length}
+                  className="group block w-64 shrink-0 rounded-3xl border border-white/5 bg-ink-700 p-8 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-flame/40 hover:shadow-card"
+                >
+                  {/* Avatar — rasm bo'lsa ko'rsatiladi, bo'lmasa bosh harflar */}
+                  <div className="relative mx-auto mb-5 h-32 w-32">
+                    <div className="ig-gradient absolute inset-0 rounded-full p-[3px]">
+                      <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-ink-800">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={`/images/${p.img}`}
+                          alt={p.name}
+                          className="h-full w-full rounded-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.style.display = "none";
+                            e.currentTarget.nextElementSibling.style.display =
+                              "flex";
+                          }}
+                        />
+                        <span
+                          className="hidden h-full w-full items-center justify-center font-display text-4xl font-700 text-flame-light"
+                          style={{ display: "none" }}
+                        >
+                          {initials(p.name)}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <h3 className="font-display text-sm font-600 leading-tight text-white">
-                  {p.name}
-                </h3>
-                <p className="mt-1 text-xs text-steel-light">{p.role[lang]}</p>
+                  <h3 className="font-display text-lg font-600 leading-tight text-white">
+                    {p.name}
+                  </h3>
+                  <p className="mt-1.5 text-sm text-steel-light">
+                    {p.role[lang]}
+                  </p>
 
-                <div className="mt-3 inline-flex items-center gap-1.5 text-xs text-steel-light transition-colors group-hover:text-flame-light">
-                  <InstagramIcon />
-                  <span className="truncate">@{p.handle}</span>
-                </div>
-              </a>
-            </Reveal>
-          ))}
-        </div>
+                  <div className="mt-4 inline-flex items-center gap-1.5 text-sm text-steel-light transition-colors group-hover:text-white">
+                    <InstagramIcon className="h-4 w-4" />
+                    <span className="truncate">@{p.handle}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </Reveal>
 
         <Reveal>
           <p className="mt-10 text-center text-sm text-steel">
